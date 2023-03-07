@@ -7,4 +7,12 @@ is.vector(numArtefactos_int)
 mean (numArtefactos_int)
 median (numArtefactos_int)
 
-moda =
+encontrar_moda = function (x) {
+  
+u = unique (x)
+tab = tabulate (match(x, u))
+u [tab == max (tab)]
+}
+
+encontrar_moda (numArtefactos_int)
+

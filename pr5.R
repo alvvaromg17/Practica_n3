@@ -16,3 +16,11 @@ u [tab == max (tab)]
 
 encontrar_moda (numArtefactos_int)
 
+
+table (numArtefactos_int) 
+
+quantnumArtefactos_int = quantile (numArtefactos_int)
+quantnumArtefactos_int
+
+IQR (quantnumArtefactos_int) #da 40
+

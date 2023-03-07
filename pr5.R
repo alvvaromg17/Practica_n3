@@ -20,7 +20,14 @@ encontrar_moda (numArtefactos_int)
 table (numArtefactos_int) 
 
 quantnumArtefactos_int = quantile (numArtefactos_int)
-quantnumArtefactos_int
+quantnumArtefactos_int 
 
-IQR (quantnumArtefactos_int) #da 40
+IQR (quantnumArtefactos_int) #da 40 El rango intercuartílico
+#de estos valores es un rango en el que se corta el 25% a cada lado. Estadísticamente, el rango intercuartílico es la diferencia entre el cuartil superior y el cuartil inferior.
+#40 es la diferencia entre 102 y 4
 
+
+
+#calcular rango 
+max (numArtefactos_int, na.rm = TRUE ) - min (numArtefactos_int, na.rm = TRUE )
+range (numArtefactos_int, na.rm = TRUE)

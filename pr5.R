@@ -28,10 +28,6 @@ moda1 = encontrar_moda (numArtefactos_int)
 
 moda1
 
-moda2 = encontrar_moda (vector3)
-
-moda2
-
 ---
 table (numArtefactos_int) 
 ---
@@ -40,6 +36,7 @@ table (numArtefactos_int)
 quantnumArtefactos_int = quantile (numArtefactos_int)
 quantnumArtefactos_int 
 
+# rango intercuartílico
 
 IQR (quantnumArtefactos_int) #da 40 El rango intercuartílico
 #de estos valores es un rango en el que se corta el 25% a cada lado. Estadísticamente, el rango intercuartílico es la diferencia entre el cuartil superior y el cuartil inferior.
@@ -62,9 +59,7 @@ var1 = var (numArtefactos_int) #927.1026
 var2 = var (vector3)
 
 
-
-
-#otra forma de hacerlo (buscar y describirlas despues)
+#otra forma de hacerlo 
 
 sd (numArtefactos_int) #desviación típica
 sd (numArtefactos_int) ^2 #la varianza es tb el cuadrado de la desviacion tipica = 927.1026
@@ -77,11 +72,12 @@ sqrt (var (numArtefactos_int)) #30.44836
 sd1 = sd(numArtefactos_int)
 sd2 = sd(vector3)
 
-#explicar la diferencia entre desviación estandar o típica y la varianza
 
 #Visualiza gráficamente de manera horizontal la dispersión del objeto ‘numArtefactos_int’
 
 plot1 = plot(numArtefactos_int, xlim =, xlab = "Index", ylab = "Vector numArtefactos_int", pch = 19, col = "black")
+
+#Vector3
 
 vector3 = c (21, 45, 33, 98, 34, 90, 67, 87, 45, 11, 73, 38, 28, 15, 50, 57, 12, 87, 29, 1)
 
@@ -91,7 +87,7 @@ vector3 = as.integer (vector3)
 
 is.integer(vector3)
 --
-
+#CV- forma 1
 
 cv_numart <- sd(numArtefactos_int) / mean(numArtefactos_int) * 100
 View (cv_numart)
@@ -99,6 +95,7 @@ View (cv_numart)
 cv_v3 <- sd(vector3) / mean(vector3) * 100
 View (cv_v3)
 
+#forma 2
 
 #create data frame
 coefvar <- data.frame (a =numArtefactos_int,
@@ -112,13 +109,8 @@ sapply (coefvar, function (x) sd (x) / mean (x) * 100 )
 #66.84602 63.59067 
 
 
-
 #Genera una tabla-resumen
-#de los estadísticos descriptivos expuestos: media, mediana, desviación estándar etc. 
-
-
-
-
+#de los estadísticos descriptivos expuestos: media, mediana, desviación estándar etc.
 df1 = data.frame(estadisticos_numart = c(media1, mediana1, rango_artefactos, var1, sd1, cv_numart))
 df2 = data.frame(estadisticos_v3 = c(media2, mediana2, rango_vector3, var2, sd2, cv_v3))
 
@@ -130,17 +122,7 @@ colnames(dataf) = c("NumArtefactos", "Vector3")
 
 View (dataf)
 
-
-
-
-
-#. Calcula el coeficiente de asimetría del objeto ‘vector3’. Interpreta su resultado. 
-#Exponga ejemplos de distribuciones de variables con asimetría positiva y negativa y simétricas. 
-#Explique cada uno de estos escenarios.
-  
-# Asimetría = Simetría con respecto a su media
-# Curtosis(Apuntamiento)= Mide cómo de achatada o apuntada es la curva
-# y cómo se agrupan valores en torno a la media
+#Calcula el coeficiente de asimetría del objeto ‘vector3’.
   
 
 install.packages("moments")
@@ -148,15 +130,15 @@ library(moments)
 
 #Calcular el sesgo
 skewness(vector3) #0.3389539
-  
-  
-  
+
+#Histograma
+DV3 <- density(na.omit (vector3))
+hist(vector3, prob = TRUE, main = "Histograma Vector3", col = "darkslateblue", ylab = "Densidad", xlab = "Valor", lty =1, lwd = 2)
+lines (DV3, lwd = 3, col = "black")
+
 #Calcula la curtosis del objeto ‘vector3’. 
-#¿Qué tipo de curtosis se encuentra asociada al anterior objeto? Justifica tu respuesta. 
 
 kurtosis (vector3) #1.952376
-
-
 
 --- #test jarque
   
@@ -166,13 +148,3 @@ jarque.test(vector3)
 #data:  vector3
 #JB = 1.2976, p-value = 0.5227
 #alternative hypothesis: greater
-
-#El valor p de la prueba resulta ser 0.05756 . 
-#Dado que este valor no es menor que α = .05, no rechazamos la hipótesis nula. 
-#No tenemos evidencia suficiente para decir que este conjunto de datos tiene una asimetría y una curtosis diferente a la distribución normal
-
-#Dado que la asimetría es negativa, esto indica que la distribución está sesgada a la izquierda.
-#Esto confirma lo que vimos en el histograma.
-
-#Dado que la curtosis es mayor que 3, esto indica que
-#la distribución tiene más valores en las colas en comparación con una distribución normal.

@@ -1,13 +1,19 @@
 numArtefactos = c (as.integer (17, 54, 10, 34, 90, 33, 49, 82, 12, 23, 56, 78, 44, 102, 10, 53, 4, 28, 37, 95))
 numArtefactos = c(17, 54, 10, 34, 90, 33, 49, 82, 12, 23, 56, 78, 44, 102, 10, 53, 4, 28, 37, 95)
-numArtefactos_int = as.integer (numArtefactos_int)
+numArtefactos_int = as.integer (numArtefactos)
 is.integer (numArtefactos_int)
 is.vector(numArtefactos_int)
 
+#Media
+
 media1 = mean (numArtefactos_int)
 media2 = mean (vector3)
+
+#Mediana 
 mediana1 = median (numArtefactos_int)
 mediana2 = median (vector3)
+
+#Moda
 
 encontrar_moda = function (x) {
   
@@ -15,6 +21,8 @@ u = unique (x)
 tab = tabulate (match(x, u))
 u [tab == max (tab)]
 }
+
+encontrar_moda
 
 moda1 = encontrar_moda (numArtefactos_int)
 
@@ -24,11 +32,14 @@ moda2 = encontrar_moda (vector3)
 
 moda2
 
-
+---
 table (numArtefactos_int) 
-
+---
+#Cuartiles
+  
 quantnumArtefactos_int = quantile (numArtefactos_int)
 quantnumArtefactos_int 
+
 
 IQR (quantnumArtefactos_int) #da 40 El rango intercuartílico
 #de estos valores es un rango en el que se corta el 25% a cada lado. Estadísticamente, el rango intercuartílico es la diferencia entre el cuartil superior y el cuartil inferior.
@@ -40,7 +51,7 @@ IQR (quantnumArtefactos_int) #da 40 El rango intercuartílico
 
 range (numArtefactos_int)
 rango_artefactos = max (numArtefactos_int) - min (numArtefactos_int)
-
+rango_artefactos
 range (vector3)
 rango_vector3 = max (vector3) - min (vector3)
 
@@ -70,8 +81,7 @@ sd2 = sd(vector3)
 
 #Visualiza gráficamente de manera horizontal la dispersión del objeto ‘numArtefactos_int’
 
-plot(numArtefactos_int, pch = 19, col = "black")
-
+plot1 = plot(numArtefactos_int, xlim =, xlab = "Index", ylab = "Vector numArtefactos_int", pch = 19, col = "black")
 
 vector3 = c (21, 45, 33, 98, 34, 90, 67, 87, 45, 11, 73, 38, 28, 15, 50, 57, 12, 87, 29, 1)
 
@@ -107,21 +117,22 @@ sapply (coefvar, function (x) sd (x) / mean (x) * 100 )
 #de los estadísticos descriptivos expuestos: media, mediana, desviación estándar etc. 
 
 
-df1 = data.frame(numArtefactos_int, vector3)
 
-df2 = data.frame(media1, media2, mediana1, mediana2, moda1, rango_artefactos, rango_vector3, var1, var2, sd1, sd2)
 
 df1 = data.frame(estadisticos_numart = c(media1, mediana1, rango_artefactos, var1, sd1, cv_numart))
-
-View (df1)
-
 df2 = data.frame(estadisticos_v3 = c(media2, mediana2, rango_vector3, var2, sd2, cv_v3))
+
 
 dataf = data.frame(df1, df2)
 
+row.names(dataf) = c ("Media", "Mediana", "Rango", "Varianza","Desviacion Estandar", "Coeficiente de Variacion")
+colnames(dataf) = c("NumArtefactos", "Vector3")
+
 View (dataf)
 
-table (dataf)
+
+
+
 
 #. Calcula el coeficiente de asimetría del objeto ‘vector3’. Interpreta su resultado. 
 #Exponga ejemplos de distribuciones de variables con asimetría positiva y negativa y simétricas. 
@@ -137,7 +148,6 @@ library(moments)
 
 #Calcular el sesgo
 skewness(vector3) #0.3389539
-  
   
   
   
